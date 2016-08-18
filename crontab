@@ -1,0 +1,11 @@
+#PDU Temperature
+*/5 * * * * /root/bin/pan_pdu/temperature/aisle_temperature.rb >> /var/log/aisle_temp.log
+#Temperatures from the IMMs of the nodes
+*/10 * * * * /root/bin/pan_pdu/temperature/get_rack_temperature.rb 2> /tmp/get_rack_temperature.out
+#PDU Power
+0 * * * * /root/bin/pan_pdu/power/pan_total_pwr.rb >> /var/log/power.log
+*/5 * * * * /root/bin/pan_pdu/power/rack_power_html.rb
+#Switch web stuff. We ping every now and then to fill the arp tables in the switches
+*/10 * * * * /root/bin/pan_status/bin/collect_ipv4_state.sh
+*/5 * * * * /root/bin/pan_ip_switchtopology/run.rb
+*/6 * * * * /root/bin/pan_fault/bin/ipmi_host_status.rb
